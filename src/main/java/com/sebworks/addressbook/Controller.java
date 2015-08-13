@@ -1,5 +1,6 @@
 package com.sebworks.addressbook;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,8 @@ public class Controller {
 	@Autowired
 	ContactRepository repository;
 
-	@RequestMapping("/all")
+	@ApiOperation("Returns all contacts in AddressBook")
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public List<Contact> findAll(){
 		Iterable<Contact> all = repository.findAll();
 		ArrayList list = new ArrayList();
@@ -32,6 +34,7 @@ public class Controller {
 		return list;
 	}
 
+	@ApiOperation("Saves or updates a contact")
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ResponseEntity save(@RequestBody Contact contact){
 		try {
@@ -50,7 +53,8 @@ public class Controller {
 		}
 	}
 
-	@RequestMapping("/delete/{id}")
+	@ApiOperation("Deletes given contact")
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity delete(@PathVariable("id") String id){
 		System.out.println("delete: "+id);
 		repository.delete(id);

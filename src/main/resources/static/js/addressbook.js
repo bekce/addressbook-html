@@ -42,6 +42,7 @@ function formDelete(){
 	if (confirm("Delete contact ?")) {
 		$.ajax({
 			url: "/api/delete/" + $("#id_field").prop('value'),
+			method: "DELETE"
 		}).done(function(){
 			alert("deleted");
 			formReset();
