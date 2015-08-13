@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Can be tested by
+ * curl -X POST -d '{"name": "rocky", "surname": "balboa", "city": "philadelphia", "phone": "18001234567"}' -v -H "Content-Type:application/json" http://localhost:8080/api/save
+ * curl http://localhost:8080/api/all
+ *
  * Created by seb on 12.08.2015.
  */
 @RestController
