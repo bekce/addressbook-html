@@ -18,6 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static springfox.documentation.schema.AlternateTypeRules.newRule;
+
 /**
  * Enables Swagger documentation on {@link Controller}
  * Created by seb on 13.08.2015.
@@ -26,30 +27,30 @@ import static springfox.documentation.schema.AlternateTypeRules.newRule;
 @EnableSwagger2
 public class SwaggerConfiguration {
 
-	@Autowired
-	private TypeResolver typeResolver;
+    @Autowired
+    private TypeResolver typeResolver;
 
-	@Bean
-	public Docket petApi() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-				.apis(RequestHandlerSelectors.any())
-				.paths(s -> !s.equals("/error"))
-				.build()
-				.pathMapping("/")
-				.genericModelSubstitutes(ResponseEntity.class)
-				.alternateTypeRules(
-						newRule(typeResolver.resolve(DeferredResult.class,
-										typeResolver.resolve(ResponseEntity.class, WildcardType.class)),
-								typeResolver.resolve(WildcardType.class)))
-				.useDefaultResponseMessages(false)
-				.globalResponseMessage(RequestMethod.GET,
-						newArrayList(new ResponseMessageBuilder()
-								.code(500)
-								.message("500 message")
-								.responseModel(new ModelRef("Error"))
-								.build()))
-				.enableUrlTemplating(true)
-				;
-	}
+    @Bean
+    public Docket petApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(s -> !s.equals("/error"))
+                .build()
+                .pathMapping("/")
+                .genericModelSubstitutes(ResponseEntity.class)
+                .alternateTypeRules(
+                        newRule(typeResolver.resolve(DeferredResult.class,
+                                        typeResolver.resolve(ResponseEntity.class, WildcardType.class)),
+                                typeResolver.resolve(WildcardType.class)))
+                .useDefaultResponseMessages(false)
+                .globalResponseMessage(RequestMethod.GET,
+                        newArrayList(new ResponseMessageBuilder()
+                                .code(500)
+                                .message("500 message")
+                                .responseModel(new ModelRef("Error"))
+                                .build()))
+                .enableUrlTemplating(true)
+                ;
+    }
 }
