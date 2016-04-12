@@ -5,7 +5,7 @@ Static files (html, js, css, etc) under `/static` directory on classpath (`src/m
 
 Business layer is simply handled by `Controller` class which runs on `/api` endpoint and serves some REST endpoints for the frontend.
 
-`Contact` data is persisted to a mongodb database with `spring-data-mongo` technology via a `ContactRepository`. An embedded mongodb will be automatically run on startup (see instructions in `application.properties` file to disable it).
+`Contact` data is persisted to a mongodb database with `spring-data-mongo` technology via a `ContactRepository`. An embedded mongodb will be automatically run on startup so you don't have to have a running database server. It will download a mongodb server automatically on first startup, so first run can take some time depending on your network speed. If you'd like to disable embedded mongodb and use your own mongodb please see instructions in `application.properties` file.
 
 Run with `mvn spring-boot:run`. Open [http://localhost:8080](http://localhost:8080) after startup.
 
